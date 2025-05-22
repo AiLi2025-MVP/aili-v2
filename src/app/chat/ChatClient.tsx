@@ -14,7 +14,6 @@ const getTranscriptForRecording = async (assetId: string): Promise<string> => {
 export default function ChatClient() {
   const [chat, setChat] = useState<{ role: string; content: string }[]>([]);
   const [input, setInput] = useState('');
-  const [uid, setUid] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const [profile] = useState({
@@ -31,8 +30,6 @@ export default function ChatClient() {
   const assetId = params?.get('assetId') ?? '';
 
   useEffect(() => {
-    setUid('demo-user'); // 🔐 Temporary mock ID
-
     const loadTranscript = async () => {
       if (assetId) {
         const transcript = await getTranscriptForRecording(assetId);
@@ -78,7 +75,7 @@ export default function ChatClient() {
 
       const data = await res.json();
       receiveMessage(data.reply || 'Sorry, something went wrong.');
-    } catch (err) {
+    } catch {
       receiveMessage('Error reaching AiLi server. Please try again.');
     }
 

@@ -5,12 +5,12 @@
 import { useState } from 'react';
 
 export default function ProfilePage() {
-  const [profile, setProfile] = useState({
-    persona: 'Visionary Builder',
-    creatorStyle: 'Cultural Architect',
-    goal: 'Monetize My IP',
-    learningStyle: 'Watching + Visuals',
-  });
+    const [profile] = useState({
+        persona: 'Visionary Builder',
+        creatorStyle: 'Cultural Architect',
+        goal: 'Monetize My IP',
+        learningStyle: 'Watching + Visuals',
+      });
 
   return (
     <main className="min-h-screen bg-black text-white px-6 py-16">
