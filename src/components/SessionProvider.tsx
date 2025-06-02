@@ -1,4 +1,4 @@
-//src/components/SessionProvider.tsx
+// src/components/SessionProvider.tsx
 
 'use client';
 
@@ -13,14 +13,13 @@ export default function SessionProvider({ children }: { children: React.ReactNod
   useEffect(() => {
     const init = async () => {
       const url = new URL(window.location.href);
+      const code = url.searchParams.get('code');
+      const state = url.searchParams.get('state');
 
-      // ✅ Only exchange if full OAuth payload exists
-      if (
-        url.searchParams.get('code') &&
-        url.searchParams.get('state') &&
-        !localStorage.getItem('code_exchanged')
-      ) {
-        const { error } = await supabase.auth.exchangeCodeForSession();
+      // ✅ DO NOT pass code/state — Supabase parses URL internally
+      if (code && state && !localStorage.getItem('code_exchanged')) {
+        const { error } = await supabase.auth.exchangeCodeForSession(); // ✅ correct usage
+
         if (error) {
           console.error('OAuth exchange error:', error.message);
         } else {
@@ -28,7 +27,6 @@ export default function SessionProvider({ children }: { children: React.ReactNod
           localStorage.setItem('code_exchanged', 'true');
         }
 
-        // ✅ Clean up URL
         router.replace(url.pathname);
       }
 
@@ -44,7 +42,9 @@ export default function SessionProvider({ children }: { children: React.ReactNod
       if (event === 'SIGNED_OUT') {
         localStorage.removeItem('code_exchanged');
       }
-      if (session) console.log('🔐 Session updated:', session.user.email);
+      if (session) {
+        console.log('🔐 Session updated:', session.user.email);
+      }
     });
 
     return () => {

@@ -13,7 +13,7 @@ const personas = {
 };
 
 export async function POST(req: Request) {
-  const { advisor, prompt } = await req.json();
+  const { advisor, prompt }: { advisor: keyof typeof personas; prompt: string } = await req.json();
 
   if (!advisor || !prompt) {
     return NextResponse.json({ reply: 'Missing advisor or prompt.' }, { status: 400 });

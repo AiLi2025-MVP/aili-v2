@@ -27,10 +27,15 @@ export default function RecordingDetailPage() {
 
     fetchRecording();
   }, [id]);
-
   const askAiLi = async () => {
     setChat('');
     const { data: { user } } = await supabase.auth.getUser();
+  
+    if (!user) {
+      console.warn('🔒 No user found');
+      return;
+    }
+  
     const res = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -38,17 +43,18 @@ export default function RecordingDetailPage() {
         messages: [
           { role: 'system', content: 'This is a transcript from a user session.' },
           { role: 'system', content: recording.transcript },
-          { role: 'user', content: 'What are the key takeaways from this recording?' },
+          { role: 'user', content: 'What are the key takeaways from this recording?' }
         ],
         tone: 'Culturally Fluent Mentor',
         assetId: recording.path,
-        userId: user.id,
-      }),
+        userId: user.id
+      })
     });
-
+  
     const { reply } = await res.json();
     setChat(reply);
   };
+  
 
   const isVideo = recording?.path?.endsWith('.webm') || recording?.path?.endsWith('.mp4');
   const assetUrl = `https://uaqbxdxihdanenkpjsyp.supabase.co/storage/v1/object/public/recordings/${recording?.path}`;

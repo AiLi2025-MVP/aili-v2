@@ -23,6 +23,12 @@ export default function RecordingsPage() {
         data: { user },
       } = await supabase.auth.getUser();
 
+      if (!user) {
+        console.warn('🔒 No user found');
+        setLoading(false);
+        return;
+      }
+
       const { data, error } = await supabase
         .from('recordings')
         .select('*')

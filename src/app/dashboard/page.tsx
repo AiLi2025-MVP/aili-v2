@@ -27,10 +27,13 @@ export default function DashboardPage() {
         .select('*')
         .eq('id', user.id)
         .single();
-      if (data) setProfile(data);
-    };
-    init();
-  }, []);
+      
+      if (data) {
+        setProfile(data);
+      } else {
+        router.push('/onboarding');
+      }
+    };    
 
   useEffect(() => {
     const mutedPref = localStorage.getItem('isMuted');
