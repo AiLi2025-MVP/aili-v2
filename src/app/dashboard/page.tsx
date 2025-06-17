@@ -90,30 +90,44 @@ export default function DashboardPage() {
           </Link>
         </section>
 
-        {/* 🧬 DNA Summary */}
-        {profile && (
-          <section className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white/5 p-4 border border-white/10 rounded-2xl backdrop-blur-md shadow-lg">
-            <div>
-              <h2 className="text-yellow-300 font-bold">Tagline</h2>
-              <p>{profile.tagline || 'Driving cultural transformation through Ai Media brilliance.'}</p>
-            </div>
-            <div>
-              <h2 className="text-yellow-300 font-bold">Personality Traits</h2>
-              <ul className="list-disc list-inside text-white/80 space-y-1">
-                <li>Innovative: Embraces new strategies in Ai Media</li>
-                <li>Decision-Maker: Acts fast, thinks smart</li>
-              </ul>
-            </div>
-            <div>
-              <h2 className="text-yellow-300 font-bold">Founder Archetype</h2>
-              <p>{profile.archetype || 'The Visionary Pioneer – charting bold new paths in Ai Media.'}</p>
-            </div>
-            <div>
-              <h2 className="text-yellow-300 font-bold">Creative Motto</h2>
-              <p>{profile.motto || 'Trailblaze the future, one billion-dollar idea at a time.'}</p>
-            </div>
-          </section>
-        )}
+        {/* 🎥 Roadwork Video (Intro Sizzler) */}
+<section className="relative w-full rounded-2xl overflow-hidden shadow-xl border border-white/10 backdrop-blur-md">
+  <video
+    autoPlay
+    loop
+    muted={isMuted}
+    playsInline
+    className="w-full h-full object-cover rounded-2xl"
+  >
+    <source src="/videos/0616_roadwork.mp4" type="video/mp4" />
+  </video>
+</section>
+
+{/* 🧬 DNA Summary */}
+{profile && (
+  <section className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white/5 p-4 border border-white/10 rounded-2xl backdrop-blur-md shadow-lg">
+    <div>
+      <h2 className="text-yellow-300 font-bold">Tagline</h2>
+      <p>{profile.tagline || 'Driving cultural transformation through Ai Media brilliance.'}</p>
+    </div>
+    <div>
+      <h2 className="text-yellow-300 font-bold">Personality Traits</h2>
+      <ul className="list-disc list-inside text-white/80 space-y-1">
+        <li>Innovative: Embraces new strategies in Ai Media</li>
+        <li>Decision-Maker: Acts fast, thinks smart</li>
+      </ul>
+    </div>
+    <div>
+      <h2 className="text-yellow-300 font-bold">Founder Archetype</h2>
+      <p>{profile.archetype || 'The Visionary Pioneer – charting bold new paths in Ai Media.'}</p>
+    </div>
+    <div>
+      <h2 className="text-yellow-300 font-bold">Creative Motto</h2>
+      <p>{profile.motto || 'Trailblaze the future, one billion-dollar idea at a time.'}</p>
+    </div>
+  </section>
+)}
+
 
         {/* 🧭 Navigation Grid */}
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6">
